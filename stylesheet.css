@@ -1,0 +1,145 @@
+body {
+  position: relative;
+  overflow: hidden;
+  font-family: monospace;
+  font-size: 15px;
+  margin: 0;
+}
+
+/***********************/
+/*** Triangle & Icon ***/
+/***********************/
+
+.triangle {
+  position: fixed;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  right: 0;
+  border-style: solid;
+  border-color: transparent whitesmoke transparent transparent;
+  margin: 15px;
+  cursor: pointer;
+}
+
+#settingsTriangle {
+  top: 0;
+  border-width: 0 40px 40px 0;
+}
+
+#infoTriangle {
+  bottom: 0;
+  border-width: 40px 40px 0 0;
+}
+
+.icon {
+  position: absolute;
+  z-index: 10;
+  left: 15px;
+  width: 15px;
+  height: 15px;
+  border-style: solid;
+  cursor: pointer;
+}
+
+#settingsIcon {
+  top: 5px;
+  border-width: 5px 5px 0 0;
+}
+
+#infoIcon {
+  bottom: 5px;
+  border-width: 0 5px 5px 0;
+}
+
+/***********************/
+/******** Modal ********/
+/***********************/
+
+.modal {
+  position: fixed;
+  z-index: 0;
+  width: 260px;
+  margin: 15px;
+  padding: 15px;
+  background: whitesmoke;
+  border-radius: 4px;
+  box-shadow: 0px 6px 14px -4px black;
+  right: 0;
+}
+
+#settingsModal {
+  top: 0;
+}
+
+#infoModal {
+  bottom: 0;
+}
+
+/***********************/
+/***** Description *****/
+/***********************/
+
+#description {
+  margin-bottom: 20px;
+}
+
+/***********************/
+/******* Sliders *******/
+/***********************/
+
+.colorSection {
+  display: flex;
+  padding: 10px 0;
+}
+
+.label {
+  width: 60px;
+  font-weight: bold;
+}
+
+.slider {
+  display: flex;
+}
+
+.valueIndicator {
+  width: 20px;
+  padding: 0 10px;
+}
+
+input {
+  width: 120px;
+}
+
+input[type='range']::-webkit-slider-thumb,
+input[type='range']::-webkit-slider-runnable-track {
+  cursor: pointer;
+}
+
+/***********************/
+/******* Buttons *******/
+/***********************/
+
+#buttons {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+}
+
+button {
+  font-family: monospace;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/***********************/
+/***** Color tiles *****/
+/***********************/
+
+#colors {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

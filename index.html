@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>RGB generator</title>
+    <meta name="description" content="Random color generator based on RGB constraints">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheet.css">
+  </head>
+  <body>
+    <div id="settingsTriangle" class="triangle">
+      <div id="settingsIcon" class="icon"></div>
+    </div>
+    <div id="settingsModal" class="modal">
+      <div id="description">Welcome to RGB color picker. Choose ranges for R, G and B and see what kind of colors are generated.</div>
+      <form>
+        <div>
+          <div class="colorSection">
+            <span class="label">Red</span>
+            <div>
+              <div class="slider">
+                <span>Min:</span><span id="redMinValue" class="valueIndicator">0</span>
+                <input type="range" id="redMin" name="redMin" min=0 max=255 value=0>
+              </div>
+              <div class="slider">
+                <span>Max:</span><span id="redMaxValue" class="valueIndicator">255</span>
+                <input type="range" id="redMax" name="redMax" min=0 max=255 value=255>
+              </div>
+            </div>
+          </div>
+          <div class="colorSection">
+            <span class="label">Green</span>
+            <div>
+              <div class="slider">
+                <span>Min:</span><span id="greenMinValue" class="valueIndicator">0</span>
+                <input type="range" id="greenMin" name="greenMin" min=0 max=255 value=0>
+              </div>
+              <div class="slider">
+                <span>Max:</span><span id="greenMaxValue" class="valueIndicator">255</span>
+                <input type="range" id="greenMax" name="greenMax" min=0 max=255 value=255>
+              </div>
+            </div>
+          </div>
+          <div class="colorSection">
+            <span class="label">Blue</span>
+            <div>
+              <div class="slider">
+                <span>Min:</span><span id="blueMinValue" class="valueIndicator">0</span>
+                <input type="range" id="blueMin" name="blueMin" min=0 max=255 value=0>
+              </div>
+              <div class="slider">
+                <span>Max:</span><span id="blueMaxValue" class="valueIndicator">255</span>
+                <input type="range" id="blueMax" name="blueMax" min=0 max=255 value=255>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="buttons">
+          <button type="button" id="copy">Copy RGB setting</button>
+          <button type="reset" id="reset">Reset</button>
+        </div>
+      </form>      
+    </div>
+    <div id="infoTriangle" class="triangle">
+      <div id="infoIcon" class="icon"></div>
+    </div>
+    <div id="infoModal" class="modal" style="display: none;">I made this because I had to generate colors for something and didn't find a nice tool to show me which RGB combinations generate which kind of colors. I hope it helps someone else as well!</div>
+    <div id="colors"></div>    
+    <script src="index.js" async defer></script>
+  </body>
+</html>
