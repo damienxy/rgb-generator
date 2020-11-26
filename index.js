@@ -1,4 +1,8 @@
 const form = document.querySelector('form');
+const rgba = document.getElementById('rgba');
+const alphaSection = document.getElementById('alphaSection');
+const alphaValue = document.getElementById('alphaValue');
+const alpha = document.getElementById('alpha');
 const reset = document.getElementById('reset');
 const copy = document.getElementById('copy');
 const settings = document.getElementById('settingsModal');
@@ -21,6 +25,7 @@ const noConstraints = {
 let currentTileWidth, currentTileHeight, currentConstraints, timeout;
 
 window.onload = () => {
+  alphaSection.style.visibility = rgba.checked ? 'visible' : 'hidden';
   currentConstraints = getConstraints();
   fillTiles(currentConstraints);
   setSliderValues();
@@ -35,6 +40,15 @@ form.addEventListener('input', e => {
   }
 });
 
+// Checkbox listeners
+const checkboxes = ['rgb', 'rgba'];
+checkboxes.forEach(id => {
+  document.getElementById(id).addEventListener('click', () => {
+    alphaSection.style.visibility = rgba.checked ? 'visible' : 'hidden';
+    updateTiles();
+  });
+});
+
 // Slider listeners
 const fieldIds = [
   'redMin',
@@ -47,12 +61,13 @@ const fieldIds = [
 
 const events = ['input', 'mousedown'];
 
-fieldIds.forEach(id => {
-  events.forEach(ev => {
+events.forEach(ev => {
+  fieldIds.forEach(id => {
     document
       .getElementById(id)
       .addEventListener(ev, e => updateSliderValues(e, id));
   });
+  alpha.addEventListener(ev, e => updateAlpha(e));
 });
 
 // Button event listeners
@@ -71,7 +86,9 @@ copy.addEventListener('click', () => {
     blueMin,
     blueMax
   } = currentConstraints;
-  const text = `RGB ranges: Red: ${redMin}-${redMax}, Green: ${greenMin}-${greenMax}, Blue: ${blueMin}-${blueMax}`;
+  const text = rgba.checked
+    ? `RGBA ranges: Red: ${redMin}-${redMax}, Green: ${greenMin}-${greenMax}, Blue: ${blueMin}-${blueMax}, Alpha: ${alpha.value}`
+    : `RGB ranges: Red: ${redMin}-${redMax}, Green: ${greenMin}-${greenMax}, Blue: ${blueMin}-${blueMax}`;
   copyToClipboard(text);
 });
 
@@ -104,7 +121,18 @@ const fillTiles = constraints => {
     const rgb = getRandomRgb(constraints);
     addTile(rgb);
   }
-  colors.style.background = getRandomRgb(constraints);
+};
+
+const updateTiles = () => {
+  const tiles = document.getElementsByClassName('tile');
+  for (let tile of tiles) {
+    const matches = tile.style.backgroundColor.match(/[0-9]{1,3}[.]*[0-9]*/g);
+    const [r, g, b] = matches;
+    const newBackground = rgba.checked
+      ? `rgba(${r},${g},${b},${alpha.value})`
+      : `rgb(${r},${g},${b})`;
+    tile.style.backgroundColor = newBackground;
+  }
 };
 
 const getCount = () => {
@@ -133,7 +161,9 @@ const getRandomRgb = constraints => {
   const red = getRandomInt(redMin, redMax);
   const green = getRandomInt(greenMin, greenMax);
   const blue = getRandomInt(blueMin, blueMax);
-  return `rgb(${red},${green},${blue})`;
+  return rgba.checked
+    ? `rgba(${red},${green},${blue},${alpha.value})`
+    : `rgb(${red},${green},${blue})`;
 };
 
 const getRandomInt = (min, max) => {
@@ -144,17 +174,19 @@ const getRandomInt = (min, max) => {
 
 const addTile = rgb => {
   let div = document.createElement('div');
+  div.classList.add('tile');
   div.style.width = `${currentTileWidth}px`;
   div.style.height = `${currentTileHeight}px`;
-  div.style.background = rgb;
+  div.style.backgroundColor = rgb;
   div.addEventListener('mousedown', () => {
-    div.classList.add('tile');
+    div.classList.add('copyCursor');
   });
   div.addEventListener('mouseup', () => {
-    div.classList.remove('tile');
+    div.classList.remove('copyCursor');
   });
   div.addEventListener('click', () => {
-    copyToClipboard(rgb);
+    const currentColor = div.style.backgroundColor;
+    copyToClipboard(currentColor);
   });
   colors.appendChild(div);
 };
@@ -166,6 +198,7 @@ const setSliderValues = () => {
     const val = document.getElementById(id + 'Value');
     val.innerHTML = elem.value;
   });
+  alphaValue.innerHTML = alpha.value;
 };
 
 const updateSliderValues = (e, id) => {
@@ -187,6 +220,11 @@ const updateSliderValues = (e, id) => {
     elem.value = other.value;
     val.innerHTML = other.value;
   }
+};
+
+const updateAlpha = e => {
+  alphaValue.innerHTML = e.target.value;
+  updateTiles();
 };
 
 // Button functions

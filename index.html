@@ -14,16 +14,22 @@
     <div id="settingsModal" class="modal">
       <div id="description">Welcome to RGB color picker. Choose ranges for R, G and B and see what kind of colors are generated.</div>
       <form>
+        <div id="radioButtons">
+          <input type="radio" id="rgb" name="type" checked><span class="radioButtonLabel">RGB</span>
+          <input type="radio" id="rgba" name="type"><span class="radioButtonLabel">RGBA</span>
+        </div>
         <div>
           <div class="colorSection">
             <span class="label">Red</span>
             <div>
               <div class="slider">
-                <span>Min:</span><span id="redMinValue" class="valueIndicator">0</span>
+                <span>Min:</span>
+                <span id="redMinValue" class="valueIndicator">0</span>
                 <input type="range" id="redMin" name="redMin" min=0 max=255 value=0>
               </div>
               <div class="slider">
-                <span>Max:</span><span id="redMaxValue" class="valueIndicator">255</span>
+                <span>Max:</span>
+                <span id="redMaxValue" class="valueIndicator">255</span>
                 <input type="range" id="redMax" name="redMax" min=0 max=255 value=255>
               </div>
             </div>
@@ -32,11 +38,13 @@
             <span class="label">Green</span>
             <div>
               <div class="slider">
-                <span>Min:</span><span id="greenMinValue" class="valueIndicator">0</span>
+                <span>Min:</span>
+                <span id="greenMinValue" class="valueIndicator">0</span>
                 <input type="range" id="greenMin" name="greenMin" min=0 max=255 value=0>
               </div>
               <div class="slider">
-                <span>Max:</span><span id="greenMaxValue" class="valueIndicator">255</span>
+                <span>Max:</span>
+                <span id="greenMaxValue" class="valueIndicator">255</span>
                 <input type="range" id="greenMax" name="greenMax" min=0 max=255 value=255>
               </div>
             </div>
@@ -45,21 +53,33 @@
             <span class="label">Blue</span>
             <div>
               <div class="slider">
-                <span>Min:</span><span id="blueMinValue" class="valueIndicator">0</span>
+                <span>Min:</span>
+                <span id="blueMinValue" class="valueIndicator">0</span>
                 <input type="range" id="blueMin" name="blueMin" min=0 max=255 value=0>
               </div>
               <div class="slider">
-                <span>Max:</span><span id="blueMaxValue" class="valueIndicator">255</span>
+                <span>Max:</span>
+                <span id="blueMaxValue" class="valueIndicator">255</span>
                 <input type="range" id="blueMax" name="blueMax" min=0 max=255 value=255>
               </div>
             </div>
           </div>
         </div>
-        <div id="buttons">
-          <button type="button" id="copy">Copy RGB setting</button>
-          <button type="reset" id="reset">Reset</button>
-        </div>
       </form>      
+      <div class="colorSection" id="alphaSection" style="visibility: hidden;">
+        <span class="label">Alpha</span>
+        <div>
+          <div class="slider">
+            <span style="visibility: hidden;">Alpha</span>
+            <span id="alphaValue" class="valueIndicator">1</span>
+            <input type="range" id="alpha" name="alpha" min=0 max=1 value=1 step=0.1>
+          </div>
+        </div>
+      </div>
+    <div id="buttons">
+      <button type="button" id="copy">Copy RGB setting</button>
+      <button type="reset" id="reset">Reset</button>
+    </div>
     </div>
     <div id="infoTriangle" class="triangle">
       <div id="infoIcon" class="icon"></div>

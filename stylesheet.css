@@ -93,7 +93,23 @@ body {
 /***********************/
 
 #description {
-  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+/***********************/
+/****** Checkboxes *****/
+/***********************/
+
+#radioButtons {
+  padding: 10px 0;
+  margin: 10px 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.radioButtonLabel {
+  padding-left: 5px;
+  padding-right: 50px;
 }
 
 /***********************/
@@ -119,7 +135,7 @@ body {
   padding: 0 10px;
 }
 
-input {
+input[type='range'] {
   width: 120px;
 }
 
@@ -158,6 +174,6 @@ button {
   justify-content: center;
 }
 
-.tile {
+.copyCursor {
   cursor: url('copy.svg'), auto;
 }
