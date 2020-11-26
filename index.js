@@ -25,16 +25,15 @@ const noConstraints = {
 let currentTileWidth, currentTileHeight, currentConstraints, timeout;
 
 window.onload = () => {
-  alphaSection.style.visibility = rgba.checked ? 'visible' : 'hidden';
-  currentConstraints = getConstraints();
-  fillTiles(currentConstraints);
-  setSliderValues();
+  resetDisplay();
 };
 
 // Form event listeners
 form.addEventListener('input', e => {
   const constraints = getConstraints();
-  if (JSON.stringify(currentConstraints) !== JSON.stringify(constraints)) {
+  const shouldUpdate =
+    JSON.stringify(currentConstraints) !== JSON.stringify(constraints);
+  if (shouldUpdate) {
     currentConstraints = constraints;
     fillTiles(constraints);
   }
@@ -72,8 +71,13 @@ events.forEach(ev => {
 
 // Button event listeners
 reset.addEventListener('click', e => {
-  if (JSON.stringify(currentConstraints) !== JSON.stringify(noConstraints)) {
-    location.reload();
+  const shouldReset =
+    JSON.stringify(currentConstraints) !== JSON.stringify(noConstraints) ||
+    alpha.valueAsNumber != 1;
+  if (shouldReset) {
+    resetAlpha();
+    resetForm();
+    resetDisplay();
   }
 });
 
@@ -227,7 +231,7 @@ const updateAlpha = e => {
   updateTiles();
 };
 
-// Button functions
+// Copy functions
 const copyToClipboard = text => {
   if (timeout) {
     clearTimeout(timeout);
@@ -251,6 +255,23 @@ const copyToClipboard = text => {
 const showCopied = () => {
   copied.style.display = 'block';
   timeout = setTimeout(() => (copied.style.display = 'none'), 1000);
+};
+
+// Reset functions
+const resetForm = () => {
+  form.reset();
+};
+
+const resetAlpha = () => {
+  alpha.value = 1;
+  alphaValue.innerHTML = 1;
+};
+
+const resetDisplay = () => {
+  alphaSection.style.visibility = rgba.checked ? 'visible' : 'hidden';
+  currentConstraints = getConstraints();
+  fillTiles(currentConstraints);
+  setSliderValues();
 };
 
 // Modal functions
