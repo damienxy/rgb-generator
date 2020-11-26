@@ -52,12 +52,6 @@ body {
   border-width: 0 4px 4px 0;
 }
 
-#copiedIcon {
-  top: 5px;
-  left: 5px;
-  border-width: 4px 0 0 4px;
-}
-
 /***********************/
 /******** Modal ********/
 /***********************/
@@ -86,6 +80,7 @@ body {
   top: 0;
   left: 0;
   width: initial;
+  padding: 10px;
 }
 
 /***********************/
