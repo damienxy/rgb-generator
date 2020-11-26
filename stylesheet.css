@@ -65,15 +65,23 @@ body {
   background: whitesmoke;
   border-radius: 4px;
   box-shadow: 0px 6px 14px -4px black;
-  right: 0;
 }
 
 #settingsModal {
   top: 0;
+  right: 0;
 }
 
 #infoModal {
   bottom: 0;
+  right: 0;
+}
+
+#copiedModal {
+  top: 0;
+  left: 0;
+  width: initial;
+  padding: 10px;
 }
 
 /***********************/
@@ -144,4 +152,8 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.tile {
+  cursor: url('copy.svg'), auto;
 }

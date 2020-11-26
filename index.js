@@ -3,6 +3,7 @@ const reset = document.getElementById('reset');
 const copy = document.getElementById('copy');
 const settings = document.getElementById('settingsModal');
 const info = document.getElementById('infoModal');
+const copied = document.getElementById('copiedModal');
 const settingsToggle = document.getElementById('settingsTriangle');
 const infoToggle = document.getElementById('infoTriangle');
 const colors = document.getElementById('colors');
@@ -17,7 +18,7 @@ const noConstraints = {
   blueMax: '255'
 };
 
-let currentTileWidth, currentTileHeight, currentConstraints;
+let currentTileWidth, currentTileHeight, currentConstraints, timeout;
 
 window.onload = () => {
   currentConstraints = getConstraints();
@@ -136,7 +137,9 @@ const getRandomRgb = constraints => {
 };
 
 const getRandomInt = (min, max) => {
-  return Math.ceil(Math.random() * (max - min) + min);
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 const addTile = rgb => {
@@ -144,6 +147,15 @@ const addTile = rgb => {
   div.style.width = `${currentTileWidth}px`;
   div.style.height = `${currentTileHeight}px`;
   div.style.background = rgb;
+  div.addEventListener('mousedown', () => {
+    div.classList.add('tile');
+  });
+  div.addEventListener('mouseup', () => {
+    div.classList.remove('tile');
+  });
+  div.addEventListener('click', () => {
+    copyToClipboard(rgb);
+  });
   colors.appendChild(div);
 };
 
@@ -179,6 +191,11 @@ const updateSliderValues = (e, id) => {
 
 // Button functions
 const copyToClipboard = text => {
+  if (timeout) {
+    clearTimeout(timeout);
+    timeout = null;
+    copied.style.display = 'none';
+  }
   let textArea = document.createElement('textarea');
   textArea.style.width = 0;
   textArea.style.height = 0;
@@ -189,7 +206,13 @@ const copyToClipboard = text => {
   textArea.setSelectionRange(0, 99999); // for mobile
   document.execCommand('copy');
   document.body.removeChild(textArea);
-  console.log('Copied. ', text);
+  console.log(text);
+  showCopied();
+};
+
+const showCopied = () => {
+  copied.style.display = 'block';
+  timeout = setTimeout(() => (copied.style.display = 'none'), 1000);
 };
 
 // Modal functions
