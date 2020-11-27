@@ -169,6 +169,14 @@ button {
   justify-content: center;
 }
 
-.copyCursor {
+.tile {
+  font-size: 10px;
+  word-wrap: break-word;
+  color: transparent;
+}
+
+.tile:hover {
+  display: block;
+  color: black;
   cursor: url('copy.svg'), auto;
 }

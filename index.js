@@ -136,6 +136,7 @@ const updateTiles = () => {
       ? `rgba(${r},${g},${b},${alpha.value})`
       : `rgb(${r},${g},${b})`;
     tile.style.backgroundColor = newBackground;
+    tile.innerHTML = newBackground;
   }
 };
 
@@ -182,14 +183,9 @@ const addTile = rgb => {
   div.style.width = `${currentTileWidth}px`;
   div.style.height = `${currentTileHeight}px`;
   div.style.backgroundColor = rgb;
-  div.addEventListener('mousedown', () => {
-    div.classList.add('copyCursor');
-  });
-  div.addEventListener('mouseup', () => {
-    div.classList.remove('copyCursor');
-  });
+  div.innerHTML = rgb;
   div.addEventListener('click', () => {
-    const currentColor = div.style.backgroundColor;
+    const currentColor = div.innerHTML;
     copyToClipboard(currentColor);
   });
   colors.appendChild(div);
